@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="/css/portal.css" />
+</head>
+<body class="bg-light">
+
+  <!-- Demo banner -->
+  <div class="alert alert-warning rounded-0 border-0 border-bottom border-warning mb-0 py-2 text-center" role="alert">
+    <small class="fw-semibold">
+      <i class="bi bi-exclamation-triangle-fill"></i>
+      Demo data &mdash; illustrative values only. This is a prototype for demonstration purposes only.
+    </small>
+  </div>
+
+  <div class="container py-5">
+    <div class="row justify-content-center align-items-start g-4">
+
+      <!-- Login card -->
+      <div class="col-12 col-md-5 col-lg-4">
+        <div class="card shadow border-0">
+          <div class="card-header bg-navy text-white text-center py-4">
+            <h4 class="mb-1 fw-bold">
+              <i class="bi bi-bank2"></i> AICTE FDR Portal
+            </h4>
+            <small class="opacity-75">Security Deposit Management</small>
+          </div>
+          <div class="card-body p-4">
+
+            <% if (typeof error !== 'undefined' && error) { %>
+              <div class="alert alert-danger py-2" role="alert">
+                <i class="bi bi-exclamation-circle-fill me-1"></i> <%= error %>
+              </div>
+            <% } %>
+
+            <form method="POST" action="/auth/login" novalidate>
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+              <div class="mb-3">
+                <label for="email" class="form-label fw-semibold">Email address</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                  <input type="email" class="form-control" id="email" name="email"
+                         required autocomplete="email" placeholder="you@demo.in" />
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label for="password" class="form-label fw-semibold">Password</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                  <input type="password" class="form-control" id="password" name="password"
+                         required autocomplete="current-password" placeholder="Password" />
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-navy w-100 fw-semibold">
+                <i class="bi bi-box-arrow-in-right"></i> Sign In
+              </button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Demo credentials card -->
+      <div class="col-12 col-md-7 col-lg-5">
+        <div class="card shadow border-0 border-start border-4 border-warning">
+          <div class="card-header bg-white fw-bold text-navy">
+            <i class="bi bi-key-fill text-warning"></i> Demo Credentials
+            <small class="text-muted fw-normal ms-2">(Password: <code>Demo@1234</code> for all)</small>
+          </div>
+          <div class="card-body p-0">
+            <table class="table table-sm table-hover mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% demoAccounts.forEach(function(acc) { %>
+                  <tr>
+                    <td>
+                      <code class="small"><%= acc.email %></code><br />
+                      <small class="text-muted"><%= acc.name %></small>
+                    </td>
+                    <td>
+                      <span class="badge
+                        <%= acc.role === 'college' ? 'bg-secondary' :
+                           acc.role === 'officer'  ? 'bg-info text-dark' :
+                           'bg-warning text-dark' %> text-capitalize">
+                        <%= acc.role %>
+                      </span>
+                    </td>
+                    <td>
+                      <!-- Quick-fill button (JS) -->
+                      <button type="button" class="btn btn-sm btn-outline-secondary py-0 px-1"
+                              onclick="fillLogin('<%= acc.email %>')"
+                              title="Fill credentials">
+                        <i class="bi bi-pencil-fill"></i>
+                      </button>
+                    </td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="alert alert-info mt-3 py-2 small" role="note">
+          <i class="bi bi-info-circle-fill"></i>
+          All data is fictitious. Institutions, FDR numbers, amounts and dates do not
+          represent real AICTE records or regulations.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-YvpcrYf0tY3lHB60NNkmXc4s9bIOgUxi8T/jzmLwc5G8sAaRDKBJMw6mnQqHRVZp"
+          crossorigin="anonymous"></script>
+  <script>
+    function fillLogin(email) {
+      document.getElementById('email').value = email;
+      document.getElementById('password').value = 'Demo@1234';
+      document.getElementById('email').focus();
+    }
+  </script>
+</body>
+</html>

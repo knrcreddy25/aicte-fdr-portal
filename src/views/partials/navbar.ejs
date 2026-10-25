@@ -1,0 +1,131 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-navy shadow-sm" role="navigation" aria-label="Main navigation">
+  <div class="container-xl">
+    <!-- Brand -->
+    <a class="navbar-brand d-flex align-items-center gap-2" href="/dashboard">
+      <img src="/img/aicte-logo.png" alt="AICTE" height="36" onerror="this.style.display='none'" />
+      <span class="fw-bold">AICTE FDR Portal</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#mainNav" aria-controls="mainNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <% if (typeof user !== 'undefined' && user) { %>
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <li class="nav-item">
+            <a class="nav-link" href="/dashboard">
+              <i class="bi bi-speedometer2"></i> Dashboard
+            </a>
+          </li>
+
+          <% if (user.role === 'college') { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/fdrs">
+                <i class="bi bi-file-earmark-text"></i> My FDRs
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/fdrs/new">
+                <i class="bi bi-plus-circle"></i> Submit FDR
+              </a>
+            </li>
+          <% } %>
+
+          <% if (user.role === 'officer' || user.role === 'approver') { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/fdrs">
+                <i class="bi bi-files"></i> All FDRs
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/release-requests">
+                <i class="bi bi-box-arrow-up-right"></i> Release Queue
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button"
+                 data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-bar-chart-line"></i> Reports
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/reports/pending-verifications">Pending Verifications</a></li>
+                <li><a class="dropdown-item" href="/reports/upcoming-maturities">Upcoming Maturities</a></li>
+                <li><a class="dropdown-item" href="/reports/missing-documents">Missing Documents</a></li>
+                <li><a class="dropdown-item" href="/reports/open-discrepancies">Open Discrepancies</a></li>
+                <li><a class="dropdown-item" href="/reports/institution-summary">Institution Summary</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/audit-log">
+                <i class="bi bi-shield-check"></i> Audit Log
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/outbox">
+                <i class="bi bi-envelope"></i> Outbox
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/settings">
+                <i class="bi bi-gear"></i> Settings
+              </a>
+            </li>
+          <% } %>
+
+        </ul>
+
+        <!-- Right side: notifications + user menu -->
+        <ul class="navbar-nav ms-auto align-items-center gap-2">
+
+          <!-- Notification Bell -->
+          <li class="nav-item">
+            <a class="nav-link position-relative" href="/notifications" aria-label="Notifications">
+              <i class="bi bi-bell-fill fs-5"></i>
+              <% if (typeof unreadCount !== 'undefined' && unreadCount > 0) { %>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                      style="font-size:0.65rem">
+                  <%= unreadCount > 99 ? '99+' : unreadCount %>
+                  <span class="visually-hidden">unread notifications</span>
+                </span>
+              <% } %>
+            </a>
+          </li>
+
+          <!-- User dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center gap-1" href="#"
+               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle fs-5"></i>
+              <span class="d-none d-lg-inline"><%= user.name %></span>
+              <span class="badge bg-secondary ms-1 text-capitalize"><%= user.role %></span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><span class="dropdown-item-text small text-muted"><%= user.email %></span></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <form method="POST" action="/auth/logout" class="d-inline">
+                  <input type="hidden" name="_csrf" value="<%= typeof csrfToken !== 'undefined' ? csrfToken : '' %>" />
+                  <button type="submit" class="dropdown-item text-danger">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                  </button>
+                </form>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+      <% } else { %>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/login">Login</a>
+          </li>
+        </ul>
+      <% } %>
+    </div>
+  </div>
+</nav>

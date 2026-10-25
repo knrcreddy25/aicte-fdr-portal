@@ -1,0 +1,30 @@
+<%
+const bodyHtml = `
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="page-title"><i class="bi bi-bell-fill"></i> Notifications</h1>
+  <form method="POST" action="/notifications/mark-read">
+    <input type="hidden" name="_csrf" value="${csrfToken}" />
+    <button type="submit" class="btn btn-sm btn-outline-secondary">
+      <i class="bi bi-check2-all"></i> Mark all as read
+    </button>
+  </form>
+</div>
+
+${notifications.length === 0 ? '<div class="alert alert-info">No notifications yet.</div>' : ''}
+
+<div class="list-group">
+  ${notifications.map(n => \`
+    <div class="list-group-item list-group-item-action \${n.is_read ? '' : 'list-group-item-light fw-semibold'}">
+      <div class="d-flex justify-content-between gap-2">
+        <span>
+          \${n.fdr_number ? \`<span class="badge bg-secondary me-1">FDR \${n.fdr_number}</span>\` : ''}
+          \${n.message}
+        </span>
+        <small class="text-muted text-nowrap">\${n.created_at ? n.created_at.slice(0,16).replace('T',' ') : ''}</small>
+      </div>
+    </div>
+  \`).join('')}
+</div>
+`;
+%>
+<%- include('../layout', { body: bodyHtml }) %>

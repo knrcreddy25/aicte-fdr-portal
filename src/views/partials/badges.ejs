@@ -1,0 +1,43 @@
+<%
+/*
+  Reusable badge partial.
+  Usage: <%- include('partials/badges', { fdr, timingStatus }) %>
+  Expects: fdr (row), timingStatus (string)
+  Renders three badges: verification_status, timingStatus, release_state
+*/
+const verificationMap = {
+  'Pending Review':    ['bg-warning text-dark', 'bi-hourglass-split'],
+  'Under Review':      ['bg-info text-dark',    'bi-search'],
+  'Verified':          ['bg-success',            'bi-check-circle-fill'],
+  'Discrepancy Found': ['bg-danger',             'bi-exclamation-circle-fill'],
+  'Rejected':          ['bg-secondary',          'bi-x-circle-fill'],
+};
+const timingMap = {
+  'Active':        ['bg-success',          'bi-check2'],
+  'Expiring Soon': ['bg-warning text-dark','bi-clock-history'],
+  'Matured':       ['bg-danger',           'bi-calendar-x'],
+  'Superseded':    ['bg-secondary',        'bi-arrow-repeat'],
+};
+const releaseMap = {
+  'None':              ['bg-light text-dark border', 'bi-dash-circle'],
+  'Requested':         ['bg-primary',                'bi-send'],
+  'Recommended':       ['bg-info text-dark',         'bi-hand-thumbs-up'],
+  'Approved-Released': ['bg-success',                'bi-unlock-fill'],
+  'Rejected':          ['bg-danger',                 'bi-x-octagon'],
+};
+
+const vStyle = verificationMap[fdr.verification_status] || ['bg-secondary','bi-question'];
+const tStyle = timingMap[timingStatus] || ['bg-secondary','bi-question'];
+const rStyle = releaseMap[fdr.release_state] || ['bg-secondary','bi-question'];
+%>
+<span class="badge <%= vStyle[0] %>" title="Verification Status">
+  <i class="bi <%= vStyle[1] %>"></i> <%= fdr.verification_status %>
+</span>
+<span class="badge <%= tStyle[0] %>" title="Timing Status">
+  <i class="bi <%= tStyle[1] %>"></i> <%= timingStatus %>
+</span>
+<% if (fdr.release_state !== 'None') { %>
+<span class="badge <%= rStyle[0] %>" title="Release State">
+  <i class="bi <%= rStyle[1] %>"></i> <%= fdr.release_state %>
+</span>
+<% } %>

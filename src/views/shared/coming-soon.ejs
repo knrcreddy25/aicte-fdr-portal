@@ -1,0 +1,12 @@
+<%
+// coming-soon.ejs — stub page for routes not yet implemented
+const bodyHtml = `
+<h1 class="page-title">${pageName}</h1>
+<div class="alert alert-secondary mt-3">
+  <i class="bi bi-tools"></i>
+  <strong>${pageName}</strong> will be implemented by the higher-model build phase.
+  The scaffold, DB schema, services, seed data, auth and middleware are all ready.
+</div>
+`;
+%>
+<%- include('../layout', { body: bodyHtml }) %>

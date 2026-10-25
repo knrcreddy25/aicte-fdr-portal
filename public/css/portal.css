@@ -1,0 +1,220 @@
+/* ============================================================
+   AICTE FDR Portal — Custom Styles
+   Palette: Navy #1a3a5c, White #fff, Grey #f4f6f9
+   ============================================================ */
+
+:root {
+  --navy:       #1a3a5c;
+  --navy-dark:  #122940;
+  --navy-light: #2a5080;
+  --accent:     #f0c040;
+  --bg-light:   #f4f6f9;
+  --text-muted: #6c757d;
+}
+
+/* ---- Base ---- */
+body {
+  background-color: var(--bg-light);
+  color: #212529;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* ---- Navy helpers (Bootstrap extension) ---- */
+.bg-navy          { background-color: var(--navy) !important; }
+.text-navy        { color: var(--navy) !important; }
+.border-navy      { border-color: var(--navy) !important; }
+
+.btn-navy {
+  background-color: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+.btn-navy:hover, .btn-navy:focus {
+  background-color: var(--navy-dark);
+  border-color: var(--navy-dark);
+  color: #fff;
+}
+.btn-outline-navy {
+  color: var(--navy);
+  border-color: var(--navy);
+}
+.btn-outline-navy:hover {
+  background-color: var(--navy);
+  color: #fff;
+}
+
+/* ---- Navbar ---- */
+.navbar.bg-navy {
+  background-color: var(--navy) !important;
+}
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255,255,255,0.85);
+  transition: color 0.15s;
+}
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus {
+  color: var(--accent);
+}
+.navbar-brand {
+  color: #fff !important;
+  font-size: 1.15rem;
+}
+
+/* ---- Cards ---- */
+.card {
+  border-radius: 0.5rem;
+  border: 1px solid #dee2e6;
+}
+.card-header {
+  border-radius: 0.5rem 0.5rem 0 0 !important;
+  font-size: 0.95rem;
+}
+
+/* ---- Stat cards (dashboard) ---- */
+.stat-card {
+  border-left: 4px solid var(--navy);
+  background: #fff;
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  transition: box-shadow 0.15s;
+}
+.stat-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.stat-card .stat-value { font-size: 2rem; font-weight: 700; line-height: 1; }
+.stat-card .stat-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
+.stat-card.danger  { border-left-color: #dc3545; }
+.stat-card.warning { border-left-color: #ffc107; }
+.stat-card.success { border-left-color: #198754; }
+.stat-card.info    { border-left-color: #0dcaf0; }
+.stat-card.primary { border-left-color: #0d6efd; }
+
+/* ---- Tables ---- */
+.table th {
+  background-color: var(--navy);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.table-hover tbody tr:hover { background-color: rgba(26,58,92,0.05); }
+
+/* ---- Badges ---- */
+.badge { font-size: 0.75rem; font-weight: 600; padding: 0.35em 0.65em; }
+
+/* ---- FDR Trust Tag ---- */
+.trust-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2em 0.6em;
+  border-radius: 0.25rem;
+}
+.trust-institution { background: #fff3cd; color: #856404; border: 1px solid #ffc107; }
+.trust-officer     { background: #d1e7dd; color: #0f5132; border: 1px solid #198754; }
+.trust-bank        { background: #cfe2ff; color: #084298; border: 1px solid #0d6efd; }
+
+/* ---- Discrepancy flags panel ---- */
+.discrepancy-panel .disc-item {
+  border-left: 4px solid #dc3545;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.5rem;
+  background: #fff5f5;
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+.discrepancy-panel .disc-item.medium {
+  border-left-color: #ffc107;
+  background: #fffbf0;
+}
+.discrepancy-panel .disc-item.resolved {
+  border-left-color: #198754;
+  background: #f0fff4;
+  opacity: 0.7;
+}
+
+/* ---- Timeline ---- */
+.timeline { position: relative; padding-left: 1.5rem; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0.45rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #dee2e6;
+}
+.timeline-item { position: relative; padding-bottom: 1.25rem; }
+.timeline-dot {
+  position: absolute;
+  left: -1.5rem;
+  top: 0.2rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: var(--navy);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px var(--navy);
+}
+.timeline-dot.success { background: #198754; box-shadow: 0 0 0 2px #198754; }
+.timeline-dot.danger  { background: #dc3545; box-shadow: 0 0 0 2px #dc3545; }
+.timeline-dot.warning { background: #ffc107; box-shadow: 0 0 0 2px #ffc107; }
+
+/* ---- Forms ---- */
+.form-label { font-weight: 600; font-size: 0.875rem; }
+.form-control:focus, .form-select:focus {
+  border-color: var(--navy);
+  box-shadow: 0 0 0 0.2rem rgba(26,58,92,0.2);
+}
+.invalid-feedback { font-size: 0.8rem; }
+
+/* ---- Page title ---- */
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.25rem;
+}
+.page-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+/* ---- Mismatch highlight (officer review) ---- */
+.mismatch-cell { background-color: #fff3cd !important; font-weight: 600; }
+.match-cell    { background-color: #d1e7dd !important; }
+
+/* ---- Simulated label ---- */
+.simulated-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  vertical-align: middle;
+  margin-left: 0.25rem;
+  padding: 0.1em 0.4em;
+  background: #f0f0f0;
+  border-radius: 0.2rem;
+  border: 1px solid #ccc;
+}
+
+/* ---- Action required table ---- */
+.action-row-high    { background-color: rgba(220,53,69,0.07) !important; }
+.action-row-warning { background-color: rgba(255,193,7,0.07) !important; }
+
+/* ---- Responsive tweaks ---- */
+@media (max-width: 768px) {
+  .stat-card .stat-value { font-size: 1.5rem; }
+  .page-title { font-size: 1.2rem; }
+  .table th, .table td { font-size: 0.8rem; }
+}
+
+/* ---- Print ---- */
+@media print {
+  .navbar, .demo-banner, footer, .btn, .breadcrumb { display: none !important; }
+  body { background: #fff; }
+  .card { border: 1px solid #ccc !important; }
+}
