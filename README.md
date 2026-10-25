@@ -9,8 +9,8 @@
 ```bash
 npm install
 npm run seed      # creates DB, inserts demo data, generates sample PDFs
-npm start         # production start  → http://localhost:3000
-npm run dev       # dev with nodemon  → http://localhost:3000
+npm start         # production start  → http://localhost:3001
+npm run dev       # dev with nodemon  → http://localhost:3001
 npm test          # run smoke tests
 ```
 

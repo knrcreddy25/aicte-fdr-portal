@@ -281,7 +281,7 @@ cron.schedule('0 2 * * *', () => {
 // Start server
 // ====================================================================
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // Only start listening if this file is run directly (not required by tests)
 if (require.main === module) {

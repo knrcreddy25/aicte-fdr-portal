@@ -604,7 +604,7 @@ async function seed() {
   └─────────────────────────────────┴──────────┘
 
   Start: npm start  |  Dev: npm run dev
-  Login: http://localhost:3000/auth/login
+  Login: http://localhost:3001/auth/login
   `);
 }
 
